@@ -1,0 +1,48 @@
+.locationTab{
+    padding: 20px 46px 30px 47px;
+}
+
+.close{
+    margin-bottom: 69px;
+    color: white;
+    width: 100%;
+
+    span{
+        float: right;
+    }
+}
+
+.search{
+    width: 268px;
+    height: 48px;
+    border: 1px solid #E7E7EB;
+    box-sizing: border-box;
+    align-items: center;
+    display:flex;
+
+    span{
+        color:#616475;
+    }
+}
+
+.search-submit{
+    width: 86px;
+    height: 48px;
+    background: #3C47E9;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: 600;
+}
+
+.tab-btns{
+    display: flex;
+    justify-content: space-between;
+}
+
+#location-name{
+    border: none;
+    background: none;
+    color:#616475;
+}
