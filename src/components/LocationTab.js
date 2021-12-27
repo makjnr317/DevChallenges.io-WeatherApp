@@ -9,6 +9,15 @@ export default function LocationTab(){
                 </div>
                 <div className="search-submit">Search</div>
             </div>
+
+        </div>
+    )
+}
+
+function Locatio(){
+    return(
+        <div className="location-option">
+            
         </div>
     )
 }

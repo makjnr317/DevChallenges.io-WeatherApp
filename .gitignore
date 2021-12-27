@@ -8,6 +8,9 @@
 # testing
 /coverage
 
+index.css.map
+
+
 # production
 /build
 
