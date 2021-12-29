@@ -1,20 +1,30 @@
 import {format} from "date-fns";
+import { useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 import imageMap from "./imageMap";
+import {switchUnit} from '../redux/actions'
 
 export default function Main({data}) {
+    const unit = useSelector(state => state.unit)
+    const dispatch = useDispatch();
+    const changeUnit = (change)=>{
+        if (unit != change){
+            dispatch(switchUnit())
+        }
+    }
     return (
         <main>
             <div className="units">
-                <div className="unit active">℃</div>
-                <div className="unit">℉</div>
+                <div className={`unit${(unit)?' active': ''}`} onClick={()=> changeUnit(true)}>℃</div>
+                <div className={`unit${(!unit)?' active': ''}`} onClick={()=> changeUnit(false)}>℉</div>
             </div>
 
             <div className="days">
-                <Day data={data[1]} tomorrow={true}/>
-                <Day data={data[2]}/>
-                <Day data={data[3]}/>
-                <Day data={data[4]}/>
-                <Day data={data[5]}/>
+                <Day data={data[1]} tomorrow={true} unit={unit}/>
+                <Day data={data[2]} unit={unit}/>
+                <Day data={data[3]} unit={unit}/>
+                <Day data={data[4]} unit={unit}/>
+                <Day data={data[5]} unit={unit}/>
             </div>
 
             <p id="highlights">Today’s Hightlights </p>
@@ -66,14 +76,14 @@ export default function Main({data}) {
     )
 }
 
-function Day({data, tomorrow}){
+function Day({data, tomorrow, unit}){
     return(
         <div className="day">
             <h1 className="day-date">{(tomorrow)?"Tomorrow": format(Date.parse(data.applicable_date), 'EEE, d MMM')}</h1>
             <img className="day-status" src={imageMap(data.weather_state_name)} alt="status"/>
             <div className="future-temps">
-                <p>{Math.floor(data.max_temp)}℃</p>
-                <p className="min-temp" >{Math.floor(data.min_temp)}℃</p>
+                <p>{(unit)?Math.floor(data.max_temp):Math.floor((data.max_temp * 9/5) + 32)}{(unit)?"℃":"℉"}</p>
+                <p className="min-temp" >{(unit)?Math.floor(data.min_temp):Math.floor((data.min_temp * 9/5) + 32)}{(unit)?"℃":"℉"}</p>
             </div>
         </div>
     )

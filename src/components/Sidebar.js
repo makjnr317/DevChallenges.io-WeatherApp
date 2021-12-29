@@ -1,8 +1,10 @@
 import cloudBack from "../images/Cloud-background.png"
 import {format} from "date-fns";
 import imageMap from "./imageMap";
+import { useSelector } from "react-redux";
 
 export default function Sidebar({location,time, status,temp}){
+    const unit = useSelector(state => state.unit)
     return(
         <div className="sidebar">
             <div className="sidebar-top">
@@ -22,7 +24,8 @@ export default function Sidebar({location,time, status,temp}){
 
             <div className="day-details">
                 <p className="temp">
-                    {Math.floor(temp)}<span>℃</span>
+                    {(unit)?Math.floor(temp):Math.floor((temp * 9/5) + 32)}
+                    <span>{(unit)?"℃":"℉"}</span>
                 </p>
 
                 <p className="status">{status}</p>
